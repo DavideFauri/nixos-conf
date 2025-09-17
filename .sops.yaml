@@ -1,0 +1,30 @@
+keys: # public keys for decrypting secrets, see https://github.com/getsops/sops?tab=readme-ov-file#23encrypting-using-age
+  
+  # derived from user ssh keys via:
+  # > nix run nixpkgs#ssh-to-age -- -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt
+  - &users:
+    - &davide_ssh age1qvgx06nnnww9sqqzfeqz872ed8rjwn5kr3c5rzfm7200jdvd39dsxl7hqz
+  
+  # derived from host ssh keys via:
+  # > nix shell nixpkgs#ssh-to-age -c ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+  - &hosts:
+    - &figaro age1ndj752qqcp606x8g8rnfnh7xmnaapwfw28jw6x59emk6nrrlf9yqjmn8ys
+
+  # private key created via:
+  # > nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
+  # public key displayed via:
+  # > nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
+  - &management age1tq2kvse9j9pzwql676u0cxhlxw4nmpgm69nwjasjjpegc9udr55sd7enjt
+
+creation_rules: # how the secrets should be created
+  - path_regex: secrets/secrets.yaml$ # file path relative to the sops.yaml file
+    key_groups:
+    - age:
+      - *davide_ssh
+      - *figaro
+      - *management
+
+
+stores:
+  yaml:
+    indent: 2
