@@ -21,7 +21,7 @@
       };
       dynamic_domain = lib.mkOption {
         default = "";
-        type =  str;
+        type = str;
         description = "Domain/subdomain to use for dynamic DNS service";
       };
 
@@ -97,9 +97,8 @@
       };
     };
 
-
     # ****** SECRETS ******
-    sops.secrets."wireguard/server-key" = {};
+    sops.secrets."wireguard/server-key" = { };
 
     # since the service uses dynamic users, this is a trick
     systemd.services.wireguard.serviceConfig.LoadCredential = [
@@ -131,14 +130,11 @@
       };
     };
 
-
-
     # ****** DYNAMIC DNS ******
-    my-dyn-dns = lib.mkIf (config.my-wireguard.dynamic_domain != ""){
+    my-dyn-dns = lib.mkIf (config.my-wireguard.dynamic_domain != "") {
       enable = true;
       dynamic_domain = config.my-wireguard.dynamic_domain;
     };
-
 
   };
 }

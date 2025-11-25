@@ -1,4 +1,9 @@
-{config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.starship = {
     settings = {
@@ -42,8 +47,8 @@
 
       # Remove space after character
       character = {
-        success_symbol = "[❯](fg:green bg:black)"; # #❯
-        error_symbol = "[❯](fg:red bg:black)"; # #❯
+        success_symbol = "[❯](fg:green bg:black)"; #  #❯
+        error_symbol = "[❯](fg:red bg:black)"; #  #❯
         format = "$symbol";
       };
 
@@ -58,7 +63,7 @@
             TEXT_C_DOWN=''${COUNT_DOWNLOADS}❯
           fi
           echo ''${TEXT_C_DOWN}
-        ''; 
+        '';
       };
 
       # Chevron that lists the number of clutter on desktop # #❯
@@ -72,7 +77,7 @@
             TEXT_C_DESK=''${COUNT_DESKTOP}❯
           fi
           echo ''${TEXT_C_DESK}
-        ''; 
+        '';
       };
 
       # Chevron that lists the number of todo items on smos # #❯
@@ -86,7 +91,7 @@
             TEXT_TODO=''${NEXT_ITEMS}❯
           fi
           echo ''${TEXT_TODO}
-        ''; 
+        '';
       };
 
       # Chevron that lists the number of unreviewed intray items # #❯
@@ -100,7 +105,7 @@
             TEXT_INTRAY=''${INTRAY_SIZE}❯
           fi
           echo ''${TEXT_INTRAY}
-        ''; 
+        '';
       };
     };
   };
