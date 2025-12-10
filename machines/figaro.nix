@@ -96,8 +96,8 @@
 
   # Desktop managers
   services.xserver.enable = true; # X11 windowing system
-  services.xserver.desktopManager.gnome.enable = true; # GNOME desktop manager
-  services.xserver.displayManager.gdm.enable = true; # GNOME display manager
+  services.desktopManager.gnome.enable = true; # GNOME desktop manager
+  services.displayManager.gdm.enable = true; # GNOME display manager
 
   #  services.displayManager.gdm.wayland = true; # allow GNOME to run on Wayland instead of Xserver
 
