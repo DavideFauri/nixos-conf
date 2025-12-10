@@ -84,6 +84,8 @@ in
     # Development
     gh
     vscode
+    waydroid
+    waydroid-helper
     #cargo
     #    julia
     #    unstable.haskellPackages.ghcup # does not work
