@@ -24,7 +24,8 @@
     #    waybar # for wayland
 
     nixd # language server for nix
-    nixfmt-rfc-style # formatter for nix
+    nixpkgs-fmt
+    #    nixfmt-rfc-style # formatter for nix
 
     nvtopPackages.amd
     inputmodule-control # LED framework lights
