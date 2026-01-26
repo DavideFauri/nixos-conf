@@ -115,7 +115,7 @@ in
   my-comfy = {
     enable = true;
     krita = true;
-    comfy-path = "${homeDir}/Apps/ComfyUI";
+    comfy-path = "${homeDir}/Apps/comfyUI";
   };
 
   home.file = {

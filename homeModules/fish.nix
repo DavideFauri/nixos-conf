@@ -3,8 +3,6 @@
 let
   username = builtins.getEnv "USER";
   homeDir = builtins.getEnv "HOME";
-
-  comfyuiDir = "${homeDir}/Documents/Git/nix-comfyui";
 in
 {
   programs.fish = {
