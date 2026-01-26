@@ -1,10 +1,12 @@
 { pkgs, ... }:
 
 let
+  username = "davide";
+  homeDir = "/home/${username}";
 in
 {
-  home.username = "davide";
-  home.homeDirectory = "/home/davide";
+  home.username = username;
+  home.homeDirectory = homeDir;
   home.stateVersion = "24.05"; # You should not change this value, even if you update Home Manager.
 
   imports = [
@@ -108,6 +110,11 @@ in
     autojump.enable = true;
     starship.enable = true;
     #    smos.enable = false;
+  };
+
+  my-comfy-krita = {
+    enable = true;
+    comfy-path = "${homeDir}/Apps/ComfyUI";
   };
 
   home.file = {
