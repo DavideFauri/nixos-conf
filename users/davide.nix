@@ -114,7 +114,8 @@ in
 
   my-comfy = {
     enable = true;
-    krita = true;
+    #    extensions = true;
+    krita = false;
     comfy-path = "${homeDir}/Apps/comfyUI";
   };
 
