@@ -102,6 +102,15 @@
 
   #  services.displayManager.gdm.wayland = true; # allow GNOME to run on Wayland instead of Xserver
 
+  # Auto login for my user
+  services.displayManager.autoLogin = {
+    enable = false; #true;  disabled so that I can unlock the keyring at each boot, I use fingerprint unlock anyway
+    user = "davide";
+  };
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.ssdm.enableGnomeKeyring = true;
+
   # ------------
   # for Davinci Resolve, see:
   # https://nixos.wiki/wiki/DaVinci_Resolve
@@ -179,18 +188,6 @@
     nssmdns4 = true;
     openFirewall = true;
   };
-
-  # ****** AUTOLOGIN ******
-
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "davide";
-  };
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  # TODO: remove these lines in the next stable version https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-3158958974
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
 
   # ****** LOCALE PREFERENCES ******
 
