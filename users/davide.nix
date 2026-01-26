@@ -12,7 +12,8 @@ in
     #    ../homeModules/kitty.nix
     ../homeModules/fish.nix
     ../homeModules/starship.nix
-    #    ../homeModules/smos.nix
+    ../homeModules/comfy-krita.nix
+    # ../homeModules/smos.nix
   ];
 
   home.packages = with pkgs; [
