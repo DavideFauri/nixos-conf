@@ -55,7 +55,7 @@ in
 
     # Media - Image
     gthumb
-    krita
+    # krita # moved to comfy-krita module
 
     # Media - Audio
     strawberry
@@ -112,8 +112,9 @@ in
     #    smos.enable = false;
   };
 
-  my-comfy-krita = {
+  my-comfy = {
     enable = true;
+    krita = true;
     comfy-path = "${homeDir}/Apps/ComfyUI";
   };
 

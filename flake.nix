@@ -19,6 +19,7 @@
 
     comfy-ui = {
       url = "github:DavideFauri/nix-comfyui";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -52,8 +53,10 @@
       nixosConfigurations = {
 
         figaro = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; }; # so that I can use inputs in the modules (e.g. sops-nix)
           inherit system;
+
+          # expose flake inputs so that I can use other flakes in the modules, e.g. sops-nix
+          specialArgs = { inherit inputs; };
 
           modules = [
             { nixpkgs.hostPlatform = system; }
@@ -68,6 +71,11 @@
 
         davide = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+
+          # expose flake inputs so home modules can reference other flakes, e.g. comfy-ui
+          extraSpecialArgs = {
+            comfyUi = inputs.comfy-ui.packages.${system};
+          };
 
           modules = [
             ./users/common.nix
