@@ -19,7 +19,6 @@ in
 
     # Windows emulation
     wine
-    wineWowPackages.stable
     winetricks
 
     # Command line
