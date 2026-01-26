@@ -24,10 +24,6 @@
     fish.enable = true;
   };
 
-  # ****** QT APPS DARK THEME ******
-  qt.enable = true;
-  qt.platformTheme = "qt5ct";
-  qt.style = "kvantum";
 
   # ****** SECRETS ******
   imports = [

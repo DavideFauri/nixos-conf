@@ -125,6 +125,11 @@
     ];
   };
 
+  # ****** QT APPS DARK THEME ******
+  qt.enable = true;
+  qt.platformTheme = "qt5ct";
+  qt.style = "kvantum";
+
   # -----------
 
   # hint to Electron apps so that they prefer using Wayland:
