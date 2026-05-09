@@ -40,7 +40,7 @@ in
     deluge
     libreoffice-fresh
     freeplane
-    chromium
+    # chromium
     zoom-us
 
     # Media - Video
@@ -48,10 +48,9 @@ in
     catt # stream to chromecast
     stremio
     vlc
-    davinci-resolve
     obs-studio
     handbrake
-    navidrome
+    davinci-resolve
 
     # Media - Image
     gthumb
@@ -59,6 +58,7 @@ in
 
     # Media - Audio
     strawberry
+    navidrome
 
     # Games
     dolphin-emu
@@ -75,7 +75,7 @@ in
     obsidian
     tectonic
     hieroglyphic
-    unstable.tex-fmt # LaTeX formatter
+    tex-fmt # LaTeX formatter
 
     # Family finance
     portfolio
@@ -113,8 +113,8 @@ in
   };
 
   my-comfy = {
-    enable = true;
-    #    extensions = true;
+    enable = false;
+    extensions = true;
     krita = false;
     comfy-path = "${homeDir}/Apps/comfyUI";
   };

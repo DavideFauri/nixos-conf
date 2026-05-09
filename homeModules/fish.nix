@@ -21,7 +21,7 @@ in
     # '';
 
     shellAliases = {
-      kondo = "$EDITOR ${homeDir}/.config/home-manager/home.nix && home-manager switch --flake /etc/nixos --impure --show-trace";
+      #      kondo = "$EDITOR ${homeDir}/.config/home-manager/home.nix && home-manager switch --flake /etc/nixos --impure --show-trace";
       #warhol = "cd ${homeDir}/comfyUI; and env HSA_OVERRIDE_GFX_VERSION=11.0.0 nix shell ${comfyuiDir}#rocm.comfyui-with-extensions --command comfyui";
       #dali = "cd ${homeDir}/comfyUI; and nix run ${comfyuiDir}#rocm.krita-with-extensions";
       nolan = "RUSTICL_ENABLE=amdgpu DRI_PRIME=1 QT_QPA_PLATFORM=xcb davinci-resolve";
