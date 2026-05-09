@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, ... } @ args:
 
 {
   networking.hostName = "figaro";
@@ -16,6 +16,15 @@
 
     # Exportable configuration for Actual server
     ../nixosModules/actual.nix
+
+    # import the unstable version of actual
+    "${args.inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/actual.nix"
+  ];
+
+  # DELETE ME AFTER 26.05
+  disabledModules = [
+    # Disable the default actual module that comes with the stable nixpkgs, since I'm using the one from unstable which has more features and is more up to date
+    "services/web-apps/actual.nix"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -44,7 +53,7 @@
   my-wireguard = {
     enable = true;
     listen_port = 51280;
-    dynamic_domain = "vpn.fauri.family";
+    dynamic_domain = "vpn.fauri.eu";
 
     vpn_interface = "wg0";
     ext_interface = "wlp4s0";
@@ -62,7 +71,7 @@
   my-immich = {
     enable = true;
     listen_port = 22083;
-#    dynamic_domain = "photo.fauri.family";
+    #    dynamic_domain = "photo.fauri.eu";
 
     use_hardware = true;
   };
@@ -72,7 +81,8 @@
     listen_port = 5006;
     use_https = true;
 
-    dataDir = "/var/lib/actual";
+    #    dataDir = "/var/lib/actual";
+    dataDir = "/home/Davide/Downloads/privateactual"; # DEBUG DEBUG DEBUG
   };
 
   # Bootloader

@@ -1,7 +1,6 @@
-{
-  lib,
-  config,
-  ...
+{ lib
+, config
+, ...
 }:
 
 {
@@ -17,7 +16,7 @@
       listen_address = lib.mkOption {
         default = "0.0.0.0";
         type = uniq str;
-        description = "Immich server address";
+        description = "Immich server address (default: listen on all interfaces)";
       };
       listen_port = lib.mkOption {
         default = 2283;
@@ -26,8 +25,8 @@
       };
 
       dynamic_domain = lib.mkOption {
-        default = "";
-        type = str;
+        default = null;
+        type = nullOr str;
         description = "Domain/subdomain to use for dynamic DNS service";
       };
 
@@ -63,7 +62,7 @@
     ];
 
     # ****** DYNAMIC DNS ******
-    my-dyn-dns = lib.mkIf (config.my-immich.dynamic_domain != "") {
+    my-dyn-dns = lib.mkIf (config.my-immich.dynamic_domain != null) {
       enable = true;
       dynamic_domain = config.my-immich.dynamic_domain;
     };

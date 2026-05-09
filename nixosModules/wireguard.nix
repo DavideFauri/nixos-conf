@@ -1,8 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }:
 
 {
@@ -20,8 +19,8 @@
         description = "Wireguard listen port";
       };
       dynamic_domain = lib.mkOption {
-        default = "";
-        type = str;
+        default = null;
+        type = nullOr str;
         description = "Domain/subdomain to use for dynamic DNS service";
       };
 
@@ -131,7 +130,7 @@
     };
 
     # ****** DYNAMIC DNS ******
-    my-dyn-dns = lib.mkIf (config.my-wireguard.dynamic_domain != "") {
+    my-dyn-dns = lib.mkIf (config.my-wireguard.dynamic_domain != null) {
       enable = true;
       dynamic_domain = config.my-wireguard.dynamic_domain;
     };
