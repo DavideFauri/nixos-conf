@@ -56,10 +56,10 @@
       interfaces.${config.my-wireguard.vpn_interface} = {
         listenPort = config.my-wireguard.listen_port; # changed from default Wireguard port
         ips = [ "10.0.0.1/14" ]; # IP and subnet on server's side of the tunnel
-        # 10.0 for machines and servers
-        # 10.1 for close family
-        # 10.2 for extended family
-        # 10.3 for guests
+        # 10.0.0.x for machines and servers
+        # 10.1.x.y for close family (x=0 for me, x=1 for Giulia, etc)
+        # 10.2.x.y for extended family
+        # 10.3.x.y for guests
         dynamicEndpointRefreshSeconds = 300;
 
         # when setting up the tunnel, add a route from the wg0 network to the internet (all incoming traffic exits from the server)
@@ -79,11 +79,11 @@
           # list of peers that can connect to this server
           {
             name = "wireguard_server";
-            publicKey = "FLkFVp+JiGFk3G2apurcdszVA1F81iRDNhoP8v/n3EE="; # find it by converting the private one
+            publicKey = "dcfKw8cSv131ibgD9Xmi26Typy7Y1yXXaQKFKwwAvW0="; # find it by converting the private one via cat [keyfile] | wg pubkey
             allowedIPs = [ "10.0.0.1/32" ];
           }
           {
-            name = "Fairphone";
+            name = "Davide_Fairphone";
             publicKey = "pzV8XqeG7/2IWBc9xVYnXhEg7rxOFqbQfDHsKP+Vzkk=";
             allowedIPs = [ "10.1.0.1/32" ];
           }
