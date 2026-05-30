@@ -16,15 +16,6 @@
 
     # Exportable configuration for Actual server
     ../nixosModules/actual.nix
-
-    # import the unstable version of actual
-    "${args.inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/actual.nix"
-  ];
-
-  # DELETE ME AFTER 26.05
-  disabledModules = [
-    # Disable the default actual module that comes with the stable nixpkgs, since I'm using the one from unstable which has more features and is more up to date
-    "services/web-apps/actual.nix"
   ];
 
   environment.systemPackages = with pkgs; [

@@ -46,7 +46,7 @@ in
     # Media - Video
     yt-dlp # download youtube
     catt # stream to chromecast
-    stremio
+    stremio-linux-shell
     vlc
     obs-studio
     handbrake
@@ -77,9 +77,6 @@ in
     hieroglyphic
     tex-fmt # LaTeX formatter
 
-    # Family finance
-    portfolio
-
     # AI stuff
     #    ollama
 
@@ -102,7 +99,7 @@ in
     #ghidra-extensions.machinelearning
     aircrack-ng # cracking wifi and having fun
     kismet # GUI for aircrack-ng
-    ath9k-htc-blobless-firmware # drivers of external antenna
+    # ath9k-htc-blobless-firmware # drivers of external antenna - broken in 26.05
 
   ];
 
