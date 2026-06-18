@@ -72,14 +72,14 @@
         #          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
         #        '';
 
-        privateKeyFile = "/run/credentials/wireguard.service/server-key";
-        generatePrivateKeyFile = true; # set up the key automatically
+        privateKeyFile = config.sops.secrets."wireguard/server-key".path; #"/run/credentials/wireguard.service/server-key";
+        #        generatePrivateKeyFile = false; # explicitly DO NOT DO THAT, use sops instead
 
         peers = [
           # list of peers that can connect to this server
           {
             name = "wireguard_server";
-            publicKey = "dcfKw8cSv131ibgD9Xmi26Typy7Y1yXXaQKFKwwAvW0="; # find it by converting the private one via cat [keyfile] | wg pubkey
+            publicKey = "FLkFVp+JiGFk3G2apurcdszVA1F81iRDNhoP8v/n3EE="; # find it by converting the private one via cat [keyfile] | wg pubkey
             allowedIPs = [ "10.0.0.1/32" ];
           }
           {
@@ -100,9 +100,9 @@
     sops.secrets."wireguard/server-key" = { };
 
     # since the service uses dynamic users, this is a trick
-    systemd.services.wireguard.serviceConfig.LoadCredential = [
-      "server-key:${config.sops.secrets."wireguard/server-key".path}"
-    ];
+    #    systemd.services.wireguard.serviceConfig.LoadCredential = [
+    #      "server-key:${config.sops.secrets."wireguard/server-key".path}"
+    #    ];
 
     # ****** SUPPORTING PACKAGES ******
     environment.systemPackages = with pkgs; [
