@@ -38,6 +38,7 @@ in
     freeplane
     # chromium
     zoom-us
+    wealthfolio
 
     # Media - Video
     yt-dlp # download youtube
