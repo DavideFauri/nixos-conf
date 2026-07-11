@@ -1,4 +1,4 @@
-{ pkgs
+{ config
 , intray
 , smos
 , ...
@@ -18,8 +18,22 @@ in
 
   home.packages = [
     intray # see the main flake.nix for how I expose the package
-    pkgs.tmux
   ];
+
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+    clock24 = true;
+
+    # Switch panes using Alt-Arrows without prefix
+    extraConfig = ''
+      bind -n M-Left select-pane -L
+      bind -n M-Right select-pane -R
+      bind -n M-Up select-pane -U
+      bind -n M-Down select-pane -D
+    '';
+
+  };
 
   programs.smos = {
     enable = true;
@@ -162,14 +176,14 @@ in
     # bash version
     smboard = {
       description = "With tmux, open a multi-pane workbench: intray, a shell, smos, and a self-updating list of pending tasks";
-      body = ''
-        tmux kill-server
-        tmux new-session \; send-keys 'while true; do clear; smos-query work; sleep 15s; done' Enter \; split-window -v \; send-keys 'smos' Enter \; split-window -h \; send-keys 'while true; do intray review; clear; sleep 30; done' Enter \; split-window -v \; send-keys 'fish' Enter \;
-      '';
+      body =
+        if config.programs.fish.enable then ''
+          tmux kill-server
+          tmux new-session \; send-keys 'while true; clear; smos-query work; sleep 15s; end' C-m \; split-window -v \; send-keys 'smos' C-m \; split-window -h \; send-keys 'while true; clear; in; sleep 30s; end' C-m \; split-window -v \; 
+        '' else ''
+          tmux kill-server
+          tmux new-session \; send-keys 'while true; do clear; smos-query work; sleep 15s; done' Enter \; split-window -v \; send-keys 'smos' Enter \; split-window -h \; send-keys 'while true; do intray review; clear; sleep 30; done' Enter \; split-window -v \;
+        '';
     };
-    # fish version
-    # tmux new-session \; send-keys 'while true; clear; smos-query work; sleep 10s; end' C-m \; split-window -v \; send-keys 'smos' C-m \; split-window -h \; send-keys 'while true; clear; in; sleep 30s; end' C-m \; split-window -v \; 
-
-
   };
 }
