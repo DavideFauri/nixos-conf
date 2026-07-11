@@ -64,10 +64,11 @@
       nixosConfigurations = {
 
         figaro = nixpkgs.lib.nixosSystem {
-          # inherit system;
 
-          # expose flake inputs so that I can use other flakes in the modules, e.g. sops-nix
-          specialArgs = { inherit system inputs; };
+          specialArgs = {
+            inherit inputs; # expose flake inputs
+            smos = inputs.smos.nixosModules.${system}.default;
+          };
 
           modules = [
             { nixpkgs.hostPlatform = system; }
@@ -83,7 +84,7 @@
         davide = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
-          # expose flake inputs so home modules can reference other flakes, e.g. comfy-ui
+          #exposing particular inputs to the below module structure
           extraSpecialArgs = {
             intray = inputs.intray.packages.${system}.default;
             smos = inputs.smos.homeManagerModules.${system}.default;

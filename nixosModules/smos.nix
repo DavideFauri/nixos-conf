@@ -1,16 +1,12 @@
 { lib
 , config
-, inputs
-, system
+, smos
 , ...
 }:
 
-let
-  smosModule = inputs.smos.nixosModules.${system}.default;
-in
 {
   imports = [
-    smosModule
+    smos # see the main flake.nix for how I expose the package
     ./dyn_dns.nix
   ];
 
