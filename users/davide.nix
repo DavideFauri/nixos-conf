@@ -15,14 +15,10 @@ in
     ../homeModules/fish.nix
     ../homeModules/starship.nix
     ../homeModules/comfy-krita.nix
-    # ../homeModules/smos.nix
+    ../homeModules/smos.nix # smos client and intray too
   ];
 
   home.packages = with pkgs; [
-
-    # Windows emulation
-    wine
-    winetricks
 
     # Command line
     powertop
@@ -106,7 +102,6 @@ in
   programs = {
     autojump.enable = true;
     starship.enable = true;
-    #    smos.enable = false;
   };
 
   my-comfy = {

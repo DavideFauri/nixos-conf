@@ -17,8 +17,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # image generation
     comfy-ui = {
       url = "github:DavideFauri/nix-comfyui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # self management
+    smos = {
+      url = "github:NorfairKing/smos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    intray = {
+      url = "github:NorfairKing/intray";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -28,6 +39,7 @@
     , nixpkgs
     , nixpkgs-unstable
     , home-manager
+    , smos
     , ...
     }@inputs:
     let
@@ -52,10 +64,10 @@
       nixosConfigurations = {
 
         figaro = nixpkgs.lib.nixosSystem {
-          inherit system;
+          # inherit system;
 
           # expose flake inputs so that I can use other flakes in the modules, e.g. sops-nix
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit system inputs; };
 
           modules = [
             { nixpkgs.hostPlatform = system; }
@@ -73,6 +85,8 @@
 
           # expose flake inputs so home modules can reference other flakes, e.g. comfy-ui
           extraSpecialArgs = {
+            intray = inputs.intray.packages.${system}.default;
+            smos = inputs.smos.homeManagerModules.${system}.default;
             comfyUi = inputs.comfy-ui.packages.${system};
           };
 

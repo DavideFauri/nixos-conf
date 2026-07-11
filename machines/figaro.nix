@@ -14,6 +14,9 @@
     # Exportable configuration for Immich server
     ../nixosModules/immich.nix
 
+    # Exportable configuration for smos server
+    ../nixosModules/smos.nix
+
     # Exportable configuration for Actual server
     ../nixosModules/actual.nix
   ];
@@ -74,6 +77,13 @@
 
     #    dataDir = "/var/lib/actual";
     dataDir = "/home/Davide/Downloads/privateactual"; # DEBUG DEBUG DEBUG
+  };
+
+  my-smos-server = {
+    enable = true;
+    api_port = 8402;
+    web_port = 8403;
+    dynamic_domain = "smos.fauri.eu";
   };
 
   # Bootloader
