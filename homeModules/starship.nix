@@ -1,11 +1,11 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ lib
+, ...
 }:
 {
   programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+
     settings = {
       # Allow for more time when executing commands, particularly on first console boot
       command_timeout = 1000;

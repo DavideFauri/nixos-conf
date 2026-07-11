@@ -72,6 +72,7 @@ in
     tectonic
     hieroglyphic
     tex-fmt # LaTeX formatter
+    pandoc
 
     # AI stuff
     #    ollama
@@ -101,7 +102,6 @@ in
 
   programs = {
     autojump.enable = true;
-    starship.enable = true;
   };
 
   my-comfy = {
