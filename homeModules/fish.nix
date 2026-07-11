@@ -80,8 +80,9 @@ in
     # accepted arguments: https://fishshell.com/docs/current/cmds/complete.html
     # nix code: https://github.com/nix-community/home-manager/blob/af2beae5f0fae0a4310cc0e6aef2572f56090353/modules/programs/fish.nix#L156
     completions = {
+      # remove all file completions (-f) except for .md files (-a)
       my-pandocx = ''
-        complete -c pandocx -d "Markdown file"-a "(ls *.md)"
+        complete -c pandocx -d "Markdown file" -fa '(ls *.md)'
       '';
     };
   };
