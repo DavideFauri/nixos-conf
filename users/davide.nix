@@ -103,6 +103,7 @@ in
 
   programs = {
     autojump.enable = true;
+    smos.workflowDir = "${homeDir}/Dropbox/Workflow";
   };
 
   my-comfy = {

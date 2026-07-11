@@ -1,4 +1,5 @@
-{ config
+{ lib
+, config
 , intray
 , smos
 , ...
@@ -37,12 +38,12 @@ in
 
   programs.smos = {
     enable = true;
-    workflowDir = workflowDir;
+    workflowDir = lib.mkDefault workflowDir; # assign the lowest priority, so it can be overridden
 
     config = {
-      workflow-dir = workflowDir;
-      archive-dir = "${workflowDir}/archive";
-      projects-dir = "${workflowDir}/projects";
+      workflow-dir = config.programs.smos.workflowDir;
+      archive-dir = "${config.programs.smos.workflowDir}/archive";
+      projects-dir = "${config.programs.smos.workflowDir}/projects";
       #goal = "TESTO DI PROVA - GOAL"; # for initialized projects
 
       explainer-mode = true; # can only open smos files
@@ -108,24 +109,12 @@ in
     # ------- ADD PROJECTS -------
     sm = {
       description = "Add a smos project to the workflow folder";
-      body = ''
-        set PREV_FOLDER (pwd);
-        and set SMOS_FOLDER ${workflowDir};
-        and cd $SMOS_FOLDER;
-        and smos $argv;
-        and cd $PREV_FOLDER
-      '';
+      body = "smos --workflow-dir ${config.programs.smos.workflowDir} $argv";
     };
 
     sm1 = {
       description = "Quick add a single-task smos project";
-      body = ''
-        set PREV_FOLDER (pwd);
-        and set SMOS_FOLDER ${workflowDir};
-        and cd $SMOS_FOLDER;
-        and smos-single $argv;
-        and cd $PREV_FOLDER
-      '';
+      body = "smos-single --workflow-dir ${config.programs.smos.workflowDir} $argv";
     };
 
     # ------- QUERY PROJECTS -------
