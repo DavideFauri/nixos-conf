@@ -80,7 +80,7 @@
   };
 
   my-smos-server = {
-    enable = true;
+    enable = false;
     api_port = 8402;
     web_port = 8403;
     dynamic_domain = "smos.fauri.eu";
