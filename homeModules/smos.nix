@@ -118,24 +118,30 @@ in
     };
 
     # ------- QUERY PROJECTS -------
+    smq = {
+      description = "Query using the custom worfklow directory";
+      body = "smos-query --workflow-dir ${config.programs.smos.workflowDir} $argv";
+    };
+
+
     smn = {
       description = "Query only the next action items";
       body = ''
-        smos-query next $argv
+        smq next $argv
       '';
     };
 
     smw = {
       description = "Query the overdue tasks";
       body = ''
-        smos-query waiting $argv
+        smq waiting $argv
       '';
     };
 
     smk = {
       description = "Query all the pending, overdue, and deadline tasks";
       body = ''
-        smos-query work $argv
+        smq work $argv
       '';
     };
 
@@ -143,21 +149,21 @@ in
     smr = {
       description = "Review tasks done this week";
       body = ''
-        smos-query log --this-week --day-block | grep -e "->  DONE\|Monday\|Tuesday\|Wednesday\|Thursday\|Friday" | sed -E 's|[0-9\-]{10} [0-9:]{8}.*->  DONE||'
+        smq log --this-week --day-block | grep -e "->  DONE\|Monday\|Tuesday\|Wednesday\|Thursday\|Friday" | sed -E 's|[0-9\-]{10} [0-9:]{8}.*->  DONE||'
       '';
     };
 
     smrr = {
       description = "Review tasks done last week";
       body = ''
-        smos-query log --last-week --day-block | grep -e "->  DONE\|Monday\|Tuesday\|Wednesday\|Thursday\|Friday" | sed -E 's|[0-9\-]{10} [0-9:]{8}.*->  DONE||'
+        smq log --last-week --day-block | grep -e "->  DONE\|Monday\|Tuesday\|Wednesday\|Thursday\|Friday" | sed -E 's|[0-9\-]{10} [0-9:]{8}.*->  DONE||'
       '';
     };
 
     smrrr = {
       description = "Review tasks done last month";
       body = ''
-        smos-query log --this-month --day-block | grep -e "-> DONE\|Monday\|Tuesday\|Wednesday\|Thursday\|Friday" | sed -E 's|[0-9\-]{10} [0-9:]{8}.*-> DONE||'
+        smq log --this-month --day-block | grep -e "-> DONE\|Monday\|Tuesday\|Wednesday\|Thursday\|Friday" | sed -E 's|[0-9\-]{10} [0-9:]{8}.*-> DONE||'
       '';
     };
 
@@ -168,7 +174,7 @@ in
       body =
         if config.programs.fish.enable then ''
           tmux kill-server
-          tmux new-session \; send-keys 'while true; clear; smos-query work; sleep 15s; end' C-m \; split-window -v \; send-keys 'smos' C-m \; split-window -h \; send-keys 'while true; clear; in; sleep 30s; end' C-m \; split-window -v \; 
+          tmux new-session \; send-keys 'while true; clear; smk; sleep 15s; end' C-m \; split-window -v \; send-keys 'smos' C-m \; split-window -h \; send-keys 'while true; clear; in; sleep 30s; end' C-m \; split-window -v \; 
         '' else ''
           tmux kill-server
           tmux new-session \; send-keys 'while true; do clear; smos-query work; sleep 15s; done' Enter \; split-window -v \; send-keys 'smos' Enter \; split-window -h \; send-keys 'while true; do intray review; clear; sleep 30; done' Enter \; split-window -v \;
