@@ -1,2 +1,4 @@
 # Ignore Work In Progress files
-./WIP
+WIP/*
+# It makes no sense to track the lock file
+flake.lock
