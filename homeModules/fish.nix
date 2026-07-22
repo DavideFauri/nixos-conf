@@ -45,8 +45,8 @@ in
       piano = {
         description = "build NixOS and Home Manager, does not switch";
         body = ''
-          sudo nixos-rebuild build --show-trace --impure --flake ${nixosConfFolder}/#(hostname)
-          home-manager build --show-trace --impure --flake ${nixosConfFolder}/#(whoami)
+          sudo nixos-rebuild dry-build --show-trace --impure --flake ${nixosConfFolder}/#(hostname)
+          home-manager build --dry-run --show-trace --impure --flake ${nixosConfFolder}/#(whoami)
         '';
       };
 
