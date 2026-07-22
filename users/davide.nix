@@ -38,7 +38,7 @@ in
     freeplane
     # chromium
     zoom-us
-    wealthfolio
+    unstable.wealthfolio
 
     # Media - Video
     yt-dlp # download youtube
