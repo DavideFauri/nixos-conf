@@ -45,17 +45,24 @@ in
       piano = {
         description = "build NixOS and Home Manager, does not switch";
         body = ''
-          sudo nixos-rebuild build --show-trace --impure --flake ${nixosConfFolder}/#(hostname)
-          home-manager build --show-trace --impure --flake ${nixosConfFolder}/#(whoami)
+          sudo nixos-rebuild dry-build --show-trace --impure --flake ${nixosConfFolder}/#(hostname)
+          home-manager build --dry-run --show-trace --impure --flake ${nixosConfFolder}/#(whoami)
         '';
       };
 
       forte = {
-        description = "update flake and switch NixOS and Home Manager";
+        description = "build and switch NixOS and Home Manager";
         body = ''
-          sudo nix flake update --flake ${nixosConfFolder}
           sudo nixos-rebuild switch --impure --flake ${nixosConfFolder}/#(hostname)
           home-manager switch --impure --flake ${nixosConfFolder}/#(whoami)
+        '';
+      };
+
+      fortissimo = {
+        description = "update flake lock, build and switch NixOS and Home Manager";
+        body = ''
+          sudo nix flake update --flake ${nixosConfFolder}
+          forte
         '';
       };
 
