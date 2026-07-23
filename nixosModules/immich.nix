@@ -67,5 +67,9 @@
       dynamic_domain = config.my-immich.dynamic_domain;
     };
 
+    # ***** VPN *****
+    my-wireguard = lib.mkIf config.my-wireguard.enable {
+      allow_TCP = [ config.my-immich.listen_port ];
+    };
   };
 }

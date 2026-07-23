@@ -55,8 +55,6 @@
     allow_TCP = [
       80
       443
-      22083 # Immich
-      5006 # Actual
       8080
     ];
     allow_UDP = [ 53 ];
